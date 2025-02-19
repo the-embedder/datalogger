@@ -12,8 +12,9 @@ mpremote connect %_MPY_DEVICE% mkdir :/lib :/lib/microdot :/lib/threadsafe :/lib
 
 mpy-cross updater.py
 mpy-cross datalogger.py
+mpy-cross datasource.py
 
-mpremote connect %_MPY_DEVICE% resume cp main.py updater.mpy datalogger.mpy :/
+mpremote connect %_MPY_DEVICE% resume cp main.py updater.mpy datalogger.mpy datasource.mpy :/
 
 PUSHD lib\microdot\src\microdot
 
@@ -60,3 +61,5 @@ PUSHD templates
 mpremote connect %_MPY_DEVICE% resume cp index.html update.html :/templates/
 
 POPD
+
+mpremote connect %_MPY_DEVICE% soft-reset

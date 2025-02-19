@@ -33,6 +33,9 @@ class NetworkConnection:
     
 net = NetworkConnection()
 
+import datasource
+apc = datasource.AnaloguePulseCounter(26)
+
 import asyncio, random
 from microdot import Microdot, Request, Response, send_file
 from microdot.utemplate import Template
@@ -50,8 +53,8 @@ async def index(request):
 @with_websocket
 async def read_sensor(request, ws):
     while True:
-        await ws.send(str(random.randrange(65536)))
-        await asyncio.sleep(0.1)
+        data = await apc.queue.get()
+        await ws.send(str(data))
 
 @app.get('/static/<path:path>')
 def static(request, path):
@@ -89,10 +92,11 @@ def shutdown(request):
     return 'The server is shutting down...'
 
 net.connect()
-
+apc.start()
 print('Starting the web server...')
 app.run()
-
+apc.stop()
 net.disconnect()
 
+import machine
 machine.soft_reset()
