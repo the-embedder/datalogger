@@ -1,0 +1,9 @@
+[submodule "lib/micropython-async"]
+	path = lib/micropython-async
+	url = https://github.com/peterhinch/micropython-async.git
+[submodule "lib/microdot"]
+	path = lib/microdot
+	url = https://github.com/miguelgrinberg/microdot.git
+[submodule "lib/utemplate"]
+	path = lib/utemplate
+	url = https://github.com/pfalcon/utemplate.git
