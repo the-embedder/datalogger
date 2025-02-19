@@ -28,3 +28,5 @@ try:
 
 except OSError:
     print('No updates found.')
+
+os.chdir('/')
