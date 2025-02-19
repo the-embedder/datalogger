@@ -9,6 +9,12 @@ IF [%1] EQU [] (
 ) ELSE SET _MPY_DEVICE=%1
 
 mpremote connect %_MPY_DEVICE% mkdir :/lib
+mpremote connect %_MPY_DEVICE% mkdir :/uploads
+
+mpremote connect %_MPY_DEVICE% fs cp main.py :/
+
+mpy-cross updater.py
+mpremote connect %_MPY_DEVICE% fs cp updater.mpy :/
 
 PUSHD lib\microdot\src\microdot
 mpremote connect %_MPY_DEVICE% mkdir :/lib/microdot
